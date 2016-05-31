@@ -3,7 +3,7 @@
 var knex = require('../knex');
 
 function Schedules() {
-    return knex('Schedule')();
+    return knex('Schedule');
 }
 
 module.exports = {

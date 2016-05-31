@@ -3,7 +3,7 @@
 var knex = require('../knex');
 
 function Users() {
-    return knex('User')();
+    return knex('User');
 }
 
 

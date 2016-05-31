@@ -3,7 +3,7 @@
 var knex = require('../knex');
 
 function Commandables() {
-    return knex('Commandable')();
+    return knex('Commandable');
 }
 
 module.exports = {

@@ -3,7 +3,7 @@
 var knex = require('../knex');
 
 function Sensors() {
-    return knex('Sensor')();
+    return knex('Sensor');
 }
 
 module.exports = {
