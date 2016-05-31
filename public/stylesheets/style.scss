@@ -1,0 +1,47 @@
+//Setup Flexboxgrid system (installed via bower)
+@import "../webComponents/flexboxgrid/css/index.css";
+@import "../webComponents/flexboxgrid/css/flexboxgrid.css";
+
+html {
+  height: 100%
+}
+
+body {
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
+    background-image: linear-gradient(90deg, rgba(94, 195, 235, .6), rgba(168,239,255,.2) 50%, rgba(94, 195, 235, .6)),
+        linear-gradient(180deg, rgba(94, 209, 235, .6), rgba(168,239,255,.1) 50%, rgba(94, 209, 235, .6));
+}
+
+.vertical-align {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+a {
+    color: #00B7FF;
+}
+
+
+paper-toolbar.bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+paper-button.action {
+    background: #EE8426;
+    margin-top: 15px;
+    a {
+        color: #ffffff;
+    }
+}
+
+paper-dropdown-menu {
+    width: 200px;
+    margin-right: 20px;
+}
