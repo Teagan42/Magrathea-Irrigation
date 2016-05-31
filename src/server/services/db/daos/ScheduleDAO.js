@@ -15,7 +15,7 @@ module.exports = {
     },
     SchedulesFor: function (date) {
         return Schedules()
-            .whereRaw('StartTime < ? AND StartTime + Duration > ?', [date, date])
+            .whereRaw('"StartTime" < ?', [date])
             .orWhere('IsRunning', true)
             .orderBy('Priority', 'desc');
     },
