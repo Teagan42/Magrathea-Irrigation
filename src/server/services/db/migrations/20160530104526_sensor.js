@@ -10,8 +10,8 @@ exports.up = function(knex, Promise) {
         table.string('ApiName').notNullable();
         table.boolean('Enabled').notNullable().defaultTo(true);
         table.integer('PinNumber');
-        table.datetime('CreatedDate').notNullable().defaultTo(new Date());
-        table.datetime('ModifiedDate').notNullable().defaultTo(new Date());
+        table.datetime('CreatedDate').notNullable().defaultTo(knex.fn.now());
+        table.datetime('ModifiedDate').notNullable().defaultTo(knex.fn.now());
         table.string('CreatedBy').index().references('Id').inTable('User');
         table.string('ModifiedBy').index().references('Id').inTable('User');
     });

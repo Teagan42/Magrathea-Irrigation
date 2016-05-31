@@ -7,7 +7,7 @@ exports.up = function(knex, Promise) {
         table.string('Id').unique().notNullable();
         table.string('CommandableId').index().references('Id').inTable('Commandable')
         table.string('Name').notNullable();
-        table.time('StartTime').notNullable();
+        table.datetime('StartTime').notNullable();
         table.string('Duration').notNullable();
         table.string('DaysOfWeek').notNullable();
         table.string('RunLambda').notNullable();
@@ -15,8 +15,8 @@ exports.up = function(knex, Promise) {
         table.integer('Priority').notNullable().defaultTo(0);
         table.boolean('Enabled').notNullable().defaultTo(true);
         table.boolean('IsRunning').notNullable().defaultTo(false);
-        table.datetime('CreatedDate').notNullable().defaultTo(new Date());
-        table.datetime('ModifiedDate').notNullable().defaultTo(new Date());
+        table.datetime('CreatedDate').notNullable().defaultTo(knex.fn.now());
+        table.datetime('ModifiedDate').notNullable().defaultTo(knex.fn.now());
         table.string('CreatedBy').index().references('Id').inTable('User');
         table.string('ModifiedBy').index().references('Id').inTable('User');
     });
