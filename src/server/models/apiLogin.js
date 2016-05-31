@@ -1,5 +1,4 @@
 "use strict";
-let passport = require('passport');
 var log = require('../services/log.js');
 
 
