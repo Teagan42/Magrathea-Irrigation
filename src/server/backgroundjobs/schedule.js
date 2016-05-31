@@ -7,14 +7,14 @@ var job = undefined;
 var runningSchedules = {};
 
 function filterJobsToStart(schedules) {
-    return schedules.clone()
+    return schedules
         .filter((schedule) => {
             return runningSchedules.includes(schedule.Id);
         });
 }
 
 function filterJobsToStop(schedules) {
-    return schedules.clone()
+    return schedules
         .filter((schedule) => {
             var currentDate = new Date().getDate();
             log.debug('CurrentDate: ' + currentDate);
