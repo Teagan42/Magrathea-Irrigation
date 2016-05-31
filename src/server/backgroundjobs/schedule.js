@@ -26,7 +26,7 @@ function filterJobsToStop(schedules) {
 
 function execute() {
     var promise = new Promise((resolve, reject) => {
-        log.info('Executing schedules.');
+        log.info('BACKGROUND JOB : SCHEDULE : EXECUTE : Executing schedules.');
         scheduleDAO.SchedulesFor(new Date())
             .then((results) => {
                 var newSchedules = filterJobsToStart(results);
@@ -41,7 +41,7 @@ function execute() {
 
                 return accept();
             }).catch((err) => {
-                log.error(err);
+                log.error('BACKGROUND JOB : SCHEDULE : EXECUTE : ' + err);
                 return reject(err);
             });
     });
@@ -51,7 +51,7 @@ function execute() {
 
 function startJobs() {
     var promise = new Promise((resolve, reject) => {
-        log.info('Starting jobs.');
+        log.info('BACKGROUND JOB : SCHEDULE : STARTJOBS : Starting jobs.');
         scheduleDAO.RunningSchedules()
             .then((results) => {
                 var doneSchedules = filterJobsToStop(results);
@@ -61,14 +61,14 @@ function startJobs() {
                         .then(() => {
                             delete runningSchedules[schedule.Id];
                         }).catch((err) => {
-                            log.error(err);
+                            log.error('BACKGROUND JOB : SCHEDULE : STARTJOBS : ' + err);
                             return reject(err);
                         });
                 });
 
                 return resolve();
             }).catch((err) => {
-                log.error(err);
+                log.error('BACKGROUND JOB : SCHEDULE : STARTJOBS : ' + err);
                 return reject(err);
             });
     });
@@ -79,16 +79,16 @@ function startJobs() {
 function start() {
     function executeHandler() {
         execute()
-            .then((result) => {
-                log.info(result);
+            .then(() => {
+                log.info('BACKGROUND JOB : SCHEDULE : START : DONE');
             })
             .catch((err) => {
-                log.error(err);
+                log.error('BACKGROUND JOB : SCHEDULE : START : ' + err);
             });
     }
 
     var promise = new Promise((resolve, reject) => {
-        log.info('Starting schedule background job.');
+        log.info('BACKGROUND JOB : SCHEDULE : START : Starting schedule background job.');
         if (job) {
             cleanup();
         }
@@ -107,7 +107,7 @@ function start() {
 
 function stop() {
     var promise = new Promise((resolve, reject) => {
-        log.info('Stopping schedule background job.');
+        log.info('BACKGROUND JOB : SCHEDULE : STOP : Stopping schedule background job.');
         cleanup()
             .then(resolve)
             .catch(reject);
@@ -118,7 +118,7 @@ function stop() {
 
 function cleanup() {
     var promise = new Promise((resolve, reject) => {
-        log.info('Cleaning up schedule background job.');
+        log.info('BACKGROUND JOB : SCHEDULE : CLEANUP : Cleaning up schedule background job.');
         if (job) {
             job.stop();
             job = undefined;
