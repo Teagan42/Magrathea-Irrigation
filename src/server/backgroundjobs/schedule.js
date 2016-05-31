@@ -39,7 +39,7 @@ function execute() {
                         });
                 });
 
-                return accept();
+                return resolve();
             }).catch((err) => {
                 log.error('BACKGROUND JOB : SCHEDULE : EXECUTE : ' + err);
                 return reject(err);
