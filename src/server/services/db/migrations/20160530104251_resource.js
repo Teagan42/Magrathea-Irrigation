@@ -7,6 +7,7 @@ exports.up = function(knex, Promise) {
         table.string('Id').unique().notNullable();
         table.string('Name').unique().notNullable();
         table.string('Type').notNullable();
+        table.string('SubType').notNullable();
         table.string('ApiName').notNullable();
         table.integer('PinNumber');
         table.datetime('CreatedDate').notNullable().defaultTo(knex.fn.now());
