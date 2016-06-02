@@ -53,13 +53,13 @@ function logout(req, res, next) {
 
 function index(req, res, next) {
     if (req.user) {
-        res.cookie('magratheaToken', req.user.Id, { maxAge: 2592000000 });
+//        res.cookie('magratheaToken', req.user.Id, { maxAge: 2592000000 });
     }
     next();
 }
 
 function login(req, res, next) {
-    if (!res.body && !res.body.user && !res.body.password) {
+    if (false) { //!res.body && !res.body.user && !res.body.password) {
         res.status(400)
             .json({
                 message: 'Invalid user or password.'
