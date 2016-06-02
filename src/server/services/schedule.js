@@ -1,13 +1,15 @@
 var log = require('./log');
+var lambda = require('./lambda');
 
 function run(schedule) {
     var promise = new Promise((resolve, reject) => {
         log.info('Starting Schedule: ' + schedule.Name);
         try {
-            var result = eval(schedule.StartLambda);
-            resolve(result);
+            lambda.execute(schedule.Lambda, 'start')
+                .then(resolve)
+                .catch(reject);
         } catch (err) {
-            reject(err);
+            return reject(err);
         }
     });
 
@@ -18,10 +20,11 @@ function stop(schedule) {
     var promise = new Promise((resolve, reject) => {
         log.info('Stopping Schedule: ' + schedule.Name)
         try {
-            var result = eval(schedule.CleanupLambda);
-            resolve(result);
+            lambda.execute(schedule.Lambda, 'cleanup')
+                .then(resolve);
+                .catch(reject);
         } catch (err) {
-            reject(err);
+            return reject(err);
         }
     });
 
