@@ -10,8 +10,7 @@ exports.up = function(knex, Promise) {
         table.datetime('StartTime').notNullable();
         table.string('Duration').notNullable();
         table.string('DaysOfWeek').notNullable();
-        table.string('RunLambda').notNullable();
-        table.string('CleanupLambda').notNullable();
+        table.string('Lambda').notNullable();
         table.integer('Priority').notNullable().defaultTo(0);
         table.boolean('Enabled').notNullable().defaultTo(true);
         table.boolean('IsRunning').notNullable().defaultTo(false);
