@@ -21,7 +21,7 @@ function stop(schedule) {
         log.info('Stopping Schedule: ' + schedule.Name)
         try {
             lambda.execute(schedule.Lambda, 'cleanup')
-                .then(resolve);
+                .then(resolve)
                 .catch(reject);
         } catch (err) {
             return reject(err);
