@@ -1,5 +1,5 @@
 var CronJob = require('cron').CronJob;
-var log = require('../services/log');
+var log = require('technicolor-logger');
 var scheduleDAO = require('../services/db/daos/ScheduleDAO');
 var scheduleService = require('../services/schedule');
 const cronSchedule = '* * * * *';

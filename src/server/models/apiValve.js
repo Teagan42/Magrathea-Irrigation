@@ -1,5 +1,5 @@
 "use strict";
-var log = require('../services/log.js');
+var log = require('technicolor-logger');
 var resourceDAO = require('../services/db/daos/ResourceDAO');
 
 var init = function(apiModel) {

@@ -2,7 +2,7 @@
 
 var config = require('../../../config.json');
 var apiModel = require('./routeManagementModel.js');
-var log = require('../services/log.js');
+var log = require('technicolor-logger');
 var models = require('../routes.js').models;
 
 apiModel.addAuthenticationHandler((q,r,n) => {
