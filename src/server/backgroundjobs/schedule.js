@@ -49,7 +49,7 @@ function stopJobs() {
         log.info('BACKGROUND JOB : SCHEDULE : STARTJOBS : Stopping jobs.');
         scheduleDAO.SchedulesToStop(new Date())
             .then((schedules) => {
-                scheules.forEach((schedule) => {
+                schedules.forEach((schedule) => {
                     scheduleService.stop(schedule)
                         .then(() => {
                             delete runningSchedules[schedule.Id];
