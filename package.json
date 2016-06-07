@@ -35,6 +35,7 @@
     "shortid": "^2.2.6",
     "simple-uuid": "0.0.1",
     "simply-uuid": "^1.0.1",
+    "technicolor-logger":"1.0.0",
     "zone.js": "^0.6.12"
   },
   "devDependencies": {
