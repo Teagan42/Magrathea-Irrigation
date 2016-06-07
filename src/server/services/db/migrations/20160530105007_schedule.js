@@ -7,8 +7,8 @@ exports.up = function(knex, Promise) {
         table.string('Id').unique().notNullable();
         table.string('ResourceId').index().references('Id').inTable('Resource')
         table.string('Name').notNullable();
-        table.datetime('StartTime').notNullable();
         table.string('Duration').notNullable();
+        table.time('StartTime').notNullable();
         table.string('DaysOfWeek').notNullable();
         table.string('Lambda').notNullable();
         table.integer('Priority').notNullable().defaultTo(0);
