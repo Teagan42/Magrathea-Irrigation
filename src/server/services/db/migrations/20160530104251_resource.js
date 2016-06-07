@@ -1,6 +1,6 @@
 "use strict";
 
-let tableName = 'Commandable';
+let tableName = 'Resource';
 
 exports.up = function(knex, Promise) {
     return knex.schema.createTable(tableName, function(table){

@@ -5,7 +5,7 @@ let tableName = 'Schedule';
 exports.up = function(knex, Promise) {
     return knex.schema.createTable(tableName, function(table){
         table.string('Id').unique().notNullable();
-        table.string('CommandableId').index().references('Id').inTable('Commandable')
+        table.string('ResourceId').index().references('Id').inTable('Resource')
         table.string('Name').notNullable();
         table.datetime('StartTime').notNullable();
         table.string('Duration').notNullable();
