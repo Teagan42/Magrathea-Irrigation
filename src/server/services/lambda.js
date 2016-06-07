@@ -1,4 +1,4 @@
-var log = require('./log');
+var log = require('technicolor-logger');
 
 function requireFromString(src, filename) {
     var promise = new Promise((resolve, reject) => {
