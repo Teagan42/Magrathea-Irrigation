@@ -23,7 +23,7 @@ function execute() {
 
 function startJobs() {
     var promise = new Promise((resolve, reject) => {
-        log.info('BACKGROUND JOB : SCHEDULE : STARTJOBS : STARTJOBS jobs.');
+        log.info('BACKGROUND JOB : SCHEDULE : STARTJOBS : Running jobs.');
         scheduleDAO.SchedulesFor(new Date())
             .then((schedules) => {
                 schedules.forEach((schedule) => {
@@ -46,7 +46,7 @@ function startJobs() {
 
 function stopJobs() {
     var promise = new Promise((resolve, reject) => {
-        log.info('BACKGROUND JOB : SCHEDULE : STARTJOBS : STOPJOBS jobs.');
+        log.info('BACKGROUND JOB : SCHEDULE : STARTJOBS : Stopping jobs.');
         scheduleDAO.SchedulesToStop(new Date())
             .then((schedules) => {
                 scheules.forEach((schedule) => {
