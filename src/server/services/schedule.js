@@ -1,4 +1,4 @@
-var log = require('./log');
+var log = require('technicolor-logger');
 var lambda = require('./lambda');
 
 function run(schedule) {
