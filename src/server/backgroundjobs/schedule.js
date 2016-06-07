@@ -6,44 +6,16 @@ const cronSchedule = '* * * * *';
 var job = undefined;
 var runningSchedules = {};
 
-function filterJobsToStart(schedules) {
-    return schedules
-        .filter((schedule) => {
-            return runningSchedules.includes(schedule.Id);
-        });
-}
-
-function filterJobsToStop(schedules) {
-    return schedules
-        .filter((schedule) => {
-            var currentDate = new Date().getDate();
-            log.debug('CurrentDate: ' + currentDate);
-            log.debug('Schedule: ' + JSON.stringify(schedule));
-
-            return false;
-        });
-}
-
 function execute() {
     var promise = new Promise((resolve, reject) => {
         log.info('BACKGROUND JOB : SCHEDULE : EXECUTE : Executing schedules.');
-        scheduleDAO.SchedulesFor(new Date())
-            .then((results) => {
-                var newSchedules = filterJobsToStart(results);
-
-                newSchedules.forEach((schedule) => {
-                    runningSchedules[schedule.Id] = true;
-                    scheduleService.run(schedule)
-                        .catch((err) => {
-                            return reject(err);
-                        });
-                });
-
-                return resolve();
-            }).catch((err) => {
-                log.error('BACKGROUND JOB : SCHEDULE : EXECUTE : ' + err);
-                return reject(err);
-            });
+        startJobs()
+            .then(() => {
+                stopJobs()
+                    .then(resolve)
+                    .catch(reject);
+            })
+            .catch(reject);
     });
 
     return promise;
@@ -51,26 +23,45 @@ function execute() {
 
 function startJobs() {
     var promise = new Promise((resolve, reject) => {
-        log.info('BACKGROUND JOB : SCHEDULE : STARTJOBS : Starting jobs.');
-        scheduleDAO.RunningSchedules()
-            .then((results) => {
-                var doneSchedules = filterJobsToStop(results);
-
-                doneSchedules.forEach((schedule) => {
-                    scheduleService.stop(schedule)
+        log.info('BACKGROUND JOB : SCHEDULE : STARTJOBS : STARTJOBS jobs.');
+        scheduleDAO.SchedulesFor(new Date())
+            .then((schedules) => {
+                schedules.forEach((schedule) => {
+                    scheduleService.run(schedule)
                         .then(() => {
-                            delete runningSchedules[schedule.Id];
+                            runningSchedules[schedule.Id] = true;
                         }).catch((err) => {
                             log.error('BACKGROUND JOB : SCHEDULE : STARTJOBS : ' + err);
                             return reject(err);
                         });
                 });
+            })
+            .catch(reject);
 
-                return resolve();
-            }).catch((err) => {
-                log.error('BACKGROUND JOB : SCHEDULE : STARTJOBS : ' + err);
-                return reject(err);
-            });
+        return resolve();
+    });
+
+    return promise;
+}
+
+function stopJobs() {
+    var promise = new Promise((resolve, reject) => {
+        log.info('BACKGROUND JOB : SCHEDULE : STARTJOBS : STOPJOBS jobs.');
+        scheduleDAO.SchedulesToStop(new Date())
+            .then((schedules) => {
+                scheules.forEach((schedule) => {
+                    scheduleService.stop(schedule)
+                        .then(() => {
+                            delete runningSchedules[schedule.Id];
+                        }).catch((err) => {
+                            log.error('BACKGROUND JOB : SCHEDULE : STOPJOBS : ' + err);
+                            return reject(err);
+                        });
+                });
+            })
+            .catch(reject);
+
+        return resolve();
     });
 
     return promise;
@@ -98,6 +89,8 @@ function start() {
             , cleanup
             , true /* Start the job right now */
         );
+
+        executeHandler();
 
         resolve();
     });
