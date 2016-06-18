@@ -26,16 +26,14 @@ module.exports = {
         return Schedules().where({Id}).first();
     },
     SchedulesFor: function (date) {
-        var time = date.getHours() + ':' + date.getMinutes() + ":00";
         return Schedules()
-            .whereRaw('(? >= "StartTime") AND (? <= "EndTime")', [time, time])
+            .whereRaw(getStartQuery(date))
             .orWhere('IsRunning', true)
             .orderBy('Priority', 'desc');
     },
     SchedulesToStop: function (date) {
-        var time = date.getHours() + ':' + date.getMinutes() + ":00";
         return Schedules()
-            .whereRaw('((? < "StartTime") OR (? > "EndTime"))', [time, time])
+            .whereRaw(getStopQuery(date))
             .andWhere("IsRunning", true)
             .orderBy('Priority', 'desc');
     },
