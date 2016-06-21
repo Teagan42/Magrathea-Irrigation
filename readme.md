@@ -1,9 +1,6 @@
 ### Setup:
 
-Assumes a postgres db named `mobileListingSearch` exists
-Assumes ngrok is installed and running - add host to passport service.
-Assumes a SF connected app - add client and secret to passport service.
-
+Assumes a postgres db named `magrathea` exists
 
 `npm install webpack webpack-dev-server bower knex -g`
 
