@@ -1,12 +1,12 @@
-var CronJob = require('cron').CronJob;
-var scheduleDAO = require('../services/db/daos/ScheduleDAO');
-var scheduleService = require('../services/schedule');
+let CronJob = require('cron').CronJob;
+let scheduleDAO = require('../services/db/daos/ScheduleDAO');
+let scheduleService = require('../services/schedule');
 const cronSchedule = '* * * * *';
-var job = undefined;
-var runningSchedules = {};
+let job = undefined;
+let runningSchedules = {};
 
 function execute() {
-    var promise = new Promise((resolve, reject) => {
+    let promise = new Promise((resolve, reject) => {
         global.log.info('BACKGROUND JOB : SCHEDULE : EXECUTE : Executing schedules.');
         startJobs()
             .then(() => {
@@ -21,7 +21,7 @@ function execute() {
 }
 
 function startJobs() {
-    var promise = new Promise((resolve, reject) => {
+    let promise = new Promise((resolve, reject) => {
         global.log.info('BACKGROUND JOB : SCHEDULE : STARTJOBS : Running jobs.');
         scheduleDAO.SchedulesFor(new Date())
             .then((schedules) => {
@@ -44,7 +44,7 @@ function startJobs() {
 }
 
 function stopJobs() {
-    var promise = new Promise((resolve, reject) => {
+    let promise = new Promise((resolve, reject) => {
         global.log.info('BACKGROUND JOB : SCHEDULE : STARTJOBS : Stopping jobs.');
         scheduleDAO.SchedulesToStop(new Date())
             .then((schedules) => {
@@ -77,7 +77,7 @@ function start() {
             });
     }
 
-    var promise = new Promise((resolve, reject) => {
+    let promise = new Promise((resolve, reject) => {
         global.log.info('BACKGROUND JOB : SCHEDULE : START : Starting schedule background job.');
         if (job) {
             cleanup();
@@ -98,7 +98,7 @@ function start() {
 }
 
 function stop() {
-    var promise = new Promise((resolve, reject) => {
+    let promise = new Promise((resolve, reject) => {
         global.log.info('BACKGROUND JOB : SCHEDULE : STOP : Stopping schedule background job.');
         cleanup()
             .then(resolve)
@@ -109,7 +109,7 @@ function stop() {
 }
 
 function cleanup() {
-    var promise = new Promise((resolve, reject) => {
+    let promise = new Promise((resolve, reject) => {
         global.log.info('BACKGROUND JOB : SCHEDULE : CLEANUP : Cleaning up schedule background job.');
         if (job) {
             job.stop();

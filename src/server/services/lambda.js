@@ -1,8 +1,8 @@
 
 function requireFromString(src, filename) {
-    var promise = new Promise((resolve, reject) => {
+    let promise = new Promise((resolve, reject) => {
         try {
-            var m = new module.constructor();
+            let m = new module.constructor();
 
             m.paths = module.paths;
             m._compile(src, filename);
@@ -17,7 +17,7 @@ function requireFromString(src, filename) {
 }
 
 function executeLambda(script, entry, context) {
-    var promise = new Promise((resolve, reject) => {
+    let promise = new Promise((resolve, reject) => {
         requireFromString(script)
             .then((methods) => {
                 if (!methods[entry] || typeof methods[entry] !== 'function') {

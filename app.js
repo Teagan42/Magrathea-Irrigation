@@ -1,17 +1,17 @@
 "use strict";
 
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var session = require('express-session');
-var scheduleBackgroundJob = require('./src/server/backgroundjobs/schedule');
-var UUID = require('simply-uuid');
-var routeManagement = require('./src/server/modules/routeManagement.js');
+let express = require('express');
+let path = require('path');
+let favicon = require('serve-favicon');
 let log = require('technicolor-logger');
+let cookieParser = require('cookie-parser');
+let bodyParser = require('body-parser');
+let session = require('express-session');
+let scheduleBackgroundJob = require('./src/server/backgroundjobs/schedule');
+let UUID = require('simply-uuid');
+let routeManagement = require('./src/server/modules/routeManagement.js');
 
-var app = express();
+let app = express();
 log.init(require('./config.json'));
 
 global.log = log;

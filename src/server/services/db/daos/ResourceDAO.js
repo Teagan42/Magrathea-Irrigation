@@ -1,6 +1,6 @@
 "use strict";
 
-var knex = require('../knex');
+let knex = require('../knex');
 
 function Resources() {
     return knex('Resource');

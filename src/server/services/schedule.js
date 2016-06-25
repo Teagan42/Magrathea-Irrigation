@@ -1,8 +1,8 @@
-var lambda = require('./lambda');
-var scheduleDAO = require('./db/daos/ScheduleDAO');
+let lambda = require('./lambda');
+let scheduleDAO = require('./db/daos/ScheduleDAO');
 
 function run(schedule) {
-    var promise = new Promise((resolve, reject) => {
+    let promise = new Promise((resolve, reject) => {
         if (schedule.IsRunning) { return resolve(); }
 
         global.log.info('Starting Schedule: ' + schedule.Name);
@@ -26,7 +26,7 @@ function run(schedule) {
 }
 
 function stop(schedule) {
-    var promise = new Promise((resolve, reject) => {
+    let promise = new Promise((resolve, reject) => {
         if (!schedule.IsRunning) { return resolve(); }
 
         global.log.info('Stopping Schedule: ' + schedule.Name);

@@ -15,10 +15,10 @@ function init(cfg) {
 }
 
 function read(deviceName) {
-    var promise = new Promise((resolve, reject) => {
+    let promise = new Promise((resolve, reject) => {
         resourceDAO.ResourceByName(deviceName)
             .then((device) => {
-                var api = config[device.ApiName];
+                let api = config[device.ApiName];
                 if (!api) reject('No API by name ' + device.ApiName);
                 if (!api.readSync) reject('API does not have read access');
 
@@ -33,10 +33,10 @@ function read(deviceName) {
 }
 
 function write(deviceName, value) {
-    var promise = new Promise((resolve, reject) => {
+    let promise = new Promise((resolve, reject) => {
         resourceDAO.ResourceByName(deviceName)
             .then((device) => {
-                var api = config[device.ApiName];
+                let api = config[device.ApiName];
                 if (!api) reject('No API by name ' + device.ApiName);
                 if (!api.writeSync) reject('API does not have write access');
 
