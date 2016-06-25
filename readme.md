@@ -8,4 +8,7 @@ Assumes a postgres db named `magrathea` exists
 
 `bower install`
 
+`webpack`
+
 `cd src/server/services/db && knex migrate:latest`
+
