@@ -3,16 +3,18 @@
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
-var log = require('technicolor-logger');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var scheduleBackgroundJob = require('./src/server/backgroundjobs/schedule');
 var UUID = require('simply-uuid');
 var routeManagement = require('./src/server/modules/routeManagement.js');
+let log = require('technicolor-logger');
 
 var app = express();
 log.init(require('./config.json'));
+
+global.log = log;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'src/client/views'));

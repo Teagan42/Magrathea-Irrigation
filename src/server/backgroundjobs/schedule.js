@@ -1,5 +1,4 @@
 var CronJob = require('cron').CronJob;
-var log = require('technicolor-logger');
 var scheduleDAO = require('../services/db/daos/ScheduleDAO');
 var scheduleService = require('../services/schedule');
 const cronSchedule = '* * * * *';
@@ -8,7 +7,7 @@ var runningSchedules = {};
 
 function execute() {
     var promise = new Promise((resolve, reject) => {
-        log.info('BACKGROUND JOB : SCHEDULE : EXECUTE : Executing schedules.');
+        global.log.info('BACKGROUND JOB : SCHEDULE : EXECUTE : Executing schedules.');
         startJobs()
             .then(() => {
                 stopJobs()
@@ -23,7 +22,7 @@ function execute() {
 
 function startJobs() {
     var promise = new Promise((resolve, reject) => {
-        log.info('BACKGROUND JOB : SCHEDULE : STARTJOBS : Running jobs.');
+        global.log.info('BACKGROUND JOB : SCHEDULE : STARTJOBS : Running jobs.');
         scheduleDAO.SchedulesFor(new Date())
             .then((schedules) => {
                 schedules.forEach((schedule) => {
@@ -31,7 +30,7 @@ function startJobs() {
                         .then(() => {
                             runningSchedules[schedule.Id] = true;
                         }).catch((err) => {
-                            log.error('BACKGROUND JOB : SCHEDULE : STARTJOBS : ' + err);
+                            global.log.error('BACKGROUND JOB : SCHEDULE : STARTJOBS : ' + err);
                             return reject(err);
                         });
                 });
@@ -46,7 +45,7 @@ function startJobs() {
 
 function stopJobs() {
     var promise = new Promise((resolve, reject) => {
-        log.info('BACKGROUND JOB : SCHEDULE : STARTJOBS : Stopping jobs.');
+        global.log.info('BACKGROUND JOB : SCHEDULE : STARTJOBS : Stopping jobs.');
         scheduleDAO.SchedulesToStop(new Date())
             .then((schedules) => {
                 schedules.forEach((schedule) => {
@@ -54,7 +53,7 @@ function stopJobs() {
                         .then(() => {
                             delete runningSchedules[schedule.Id];
                         }).catch((err) => {
-                            log.error('BACKGROUND JOB : SCHEDULE : STOPJOBS : ' + err);
+                            global.log.error('BACKGROUND JOB : SCHEDULE : STOPJOBS : ' + err);
                             return reject(err);
                         });
                 });
@@ -71,15 +70,15 @@ function start() {
     function executeHandler() {
         execute()
             .then(() => {
-                log.info('BACKGROUND JOB : SCHEDULE : START : DONE');
+                global.log.info('BACKGROUND JOB : SCHEDULE : START : DONE');
             })
             .catch((err) => {
-                log.error('BACKGROUND JOB : SCHEDULE : START : ' + err);
+                global.log.error('BACKGROUND JOB : SCHEDULE : START : ' + err);
             });
     }
 
     var promise = new Promise((resolve, reject) => {
-        log.info('BACKGROUND JOB : SCHEDULE : START : Starting schedule background job.');
+        global.log.info('BACKGROUND JOB : SCHEDULE : START : Starting schedule background job.');
         if (job) {
             cleanup();
         }
@@ -100,7 +99,7 @@ function start() {
 
 function stop() {
     var promise = new Promise((resolve, reject) => {
-        log.info('BACKGROUND JOB : SCHEDULE : STOP : Stopping schedule background job.');
+        global.log.info('BACKGROUND JOB : SCHEDULE : STOP : Stopping schedule background job.');
         cleanup()
             .then(resolve)
             .catch(reject);
@@ -111,7 +110,7 @@ function stop() {
 
 function cleanup() {
     var promise = new Promise((resolve, reject) => {
-        log.info('BACKGROUND JOB : SCHEDULE : CLEANUP : Cleaning up schedule background job.');
+        global.log.info('BACKGROUND JOB : SCHEDULE : CLEANUP : Cleaning up schedule background job.');
         if (job) {
             job.stop();
             job = undefined;
