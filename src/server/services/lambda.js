@@ -1,3 +1,4 @@
+"use strict"
 
 function requireFromString(src, filename) {
     let promise = new Promise((resolve, reject) => {

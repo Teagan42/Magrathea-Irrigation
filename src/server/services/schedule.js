@@ -1,3 +1,5 @@
+"use strict"
+
 let lambda = require('./lambda');
 let scheduleDAO = require('./db/daos/ScheduleDAO');
 

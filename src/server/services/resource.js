@@ -1,3 +1,5 @@
+"use strict"
+
 let resourceDAO = require('./db/daos/resourceDAO');
 
 let config = {};

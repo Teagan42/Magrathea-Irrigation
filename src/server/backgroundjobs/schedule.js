@@ -1,3 +1,5 @@
+"use strict"
+
 let CronJob = require('cron').CronJob;
 let scheduleDAO = require('../services/db/daos/ScheduleDAO');
 let scheduleService = require('../services/schedule');

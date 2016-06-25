@@ -1,3 +1,5 @@
+"use strict"
+
 const API_NAME = 'GPIO';
 const resourceTypeToDirection = {
     valve: 'out'
