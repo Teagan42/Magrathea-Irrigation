@@ -1,5 +1,4 @@
 "use strict";
-var log = require('technicolor-logger');
 
 
 var init = function(apiModel) {
