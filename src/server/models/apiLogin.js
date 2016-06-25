@@ -1,7 +1,6 @@
 "use strict";
 
-
-var init = function(apiModel) {
+let init = function(apiModel) {
     apiModel.registerPublicRoute('get'
         , 'authenticate'
         , '/authenticate'
