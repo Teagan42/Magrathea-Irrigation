@@ -25,9 +25,13 @@ var init = function(apiModel) {
                 'required': false
                 , 'dataType': 'string'
             }
-            , 'pin': {
+            , 'apiName': {
                 'required': false
-                , 'dataType': 'int'
+                , 'dataType': 'string'
+            }
+            , 'address': {
+                'required': false
+                , 'dataType': 'string'
             }
         }
         , 'Update the valve record in the database.');
@@ -41,9 +45,13 @@ var init = function(apiModel) {
                 'required': true
                 , 'dataType': 'string'
             }
-            , 'pin': {
+            , 'apiName': {
                 'required': true
-                , 'dataType': 'int'
+                , 'dataType': 'string'
+            }
+            , 'address': {
+                'required': true
+                , 'dataType': 'string'
             }
         }
         , 'Add a new valve to the database.');
