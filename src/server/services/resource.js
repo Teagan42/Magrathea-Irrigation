@@ -1,5 +1,6 @@
 "use strict"
 
+// TODO HISTORY
 let resourceDAO = require('./db/daos/resourceDAO');
 
 let config = {};
