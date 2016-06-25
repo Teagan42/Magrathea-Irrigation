@@ -40,7 +40,7 @@ let resourceCache = {};
 
 var Pin = function (resource) {
     this.id = resource.Id;
-    this.gpio = new GPIO(resource.PinNumber
+    this.gpio = new GPIO(resource.Address
         , resourceTypeToDirection[resource.Type]);
 };
 
@@ -48,7 +48,7 @@ function validate(resource) {
     var promise = new Promise((resolve, reject) => {
         if (!resource) { return reject('Resource is undefined.'); }
         if (!resource.ApiName === 'GPIO') { return reject('Resource is not GPIO api accessible.'); }
-        if (!validPins.includes(resource.PinNumber)) { return reject('Invalid pin number.'); }
+        if (!validPins.includes(resource.Address)) { return reject('Invalid pin number.'); }
 
         resolve(cacheResource(resource));
     });
