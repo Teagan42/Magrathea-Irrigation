@@ -4,7 +4,6 @@ let shortId = require('shortid');
 let userDAO = require('./db/daos/UserDAO.js');
 let sfuserDAO = require('./db/daos/SFUserDAO.js');
 
-
 function ensureProfileDataPersists(username, password) {
     let result = new Promise(function(resolve, reject) {
         verifyUser(username, password)
