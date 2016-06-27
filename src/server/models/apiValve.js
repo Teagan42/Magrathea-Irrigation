@@ -80,11 +80,44 @@ function checkBodyFor(fields, req) {
 }
 
 function getValves(req, res, next) {
-
+    resourceDAO.Resources()
+        .where('SubType', 'VALVE')
+        .then((valves) => {
+            res.status(200)
+                .json({
+                    message: 'successful'
+                    , code: 200
+                    , data: valves
+                });
+        })
+        .catch((err) => {
+            res.status(500)
+                .json({
+                    message: 'An unknown error occurred trying to reach the database.'
+                    , code: 500
+                });
+        });
 }
 
 function getValve(req, res, next) {
+    let valveId = request.params.valveId;
 
+    resourceDAO.ResourceById(valveId)
+        .then((v) => {
+            res.status(200)
+                .json({
+                    message: 'successful'
+                    , code: 200
+                    , data: v
+                });
+        })
+        .catch((err) => {
+            res.status(404)
+                .json({
+                    message: 'Device not found.'
+                    , code: 404
+                });
+        });
 }
 
 function updateValve(req, res, next) {
